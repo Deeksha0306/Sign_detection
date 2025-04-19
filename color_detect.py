@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import cv2 as cv
 
 vid = cv.VideoCapture(0)
-while(1):
+while True:
     _,img = vid.read()
     hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 
@@ -36,7 +36,7 @@ while(1):
             x, y, w, h = cv.boundingRect(contour)
             img = cv.rectangle(img, (x,y),(x+w, y+h), (0,0,255), thickness = 2)
             cv.putText(img,"Red color", (x,y), cv.FONT_HERSHEY_SIMPLEX, 1, (0,0,255))
-    
+            cv.imshow("blue color",img)
 
     contour, heirarchy = cv.findContours(greenmask, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contour):
@@ -45,6 +45,7 @@ while(1):
             x, y, w, h = cv.boundingRect(contour)
             img = cv.rectangle(img, (x,y),(x+w, y+h), (0,255,0), thickness = 2)
             cv.putText(img,"Green color", (x,y), cv.FONT_HERSHEY_SIMPLEX, 1, (0,255,0))
+            cv.imshow("blue color",img)
 
     contour, heirarchy = cv.findContours(bluemask, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contour):
@@ -53,7 +54,7 @@ while(1):
             x, y, w, h = cv.boundingRect(contour)
             img = cv.rectangle(img, (x,y),(x+w, y+h), (255,0,0), thickness = 2)
             cv.putText(img,"Blue color", (x,y), cv.FONT_HERSHEY_SIMPLEX, 1, (255,0,0))
-    cv.imshow("blue color",img)
+            cv.imshow("blue color",img)
 
     if cv.waitKey(10) & 0xff==ord('d'):
         vid.release()
